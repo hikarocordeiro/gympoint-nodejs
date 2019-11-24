@@ -60,20 +60,28 @@ class StudentController {
   }
 
   async index(req, res) {
-    const { page = 1, name } = req.query;
+    const { name } = req.query;
     const students = await (name
       ? Student.findAll({
           attributes: ['id', 'name', 'email', 'age', 'weight', 'height'],
-          limit: 20,
-          offset: (page - 1) * 20,
           where: { name: { [Op.iLike]: `%${name}%` } },
         })
       : Student.findAll({
           attributes: ['id', 'name', 'email', 'age', 'weight', 'height'],
-          limit: 20,
-          offset: (page - 1) * 20,
         }));
     return res.json(students);
+  }
+
+  async delete(req, res) {
+    const student = await Student.findByPk(req.params.id);
+
+    if (!student) {
+      return res.status(404).json({ error: 'Student not found' });
+    }
+
+    await Student.destroy({ where: { id: student.id } });
+
+    return res.status(200).json();
   }
 }
 
