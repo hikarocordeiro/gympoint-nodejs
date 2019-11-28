@@ -43,7 +43,7 @@ routes.put('/enrollments/:id', EnrollmentController.update);
 routes.get('/enrollments', EnrollmentController.index);
 routes.delete('/enrollments/:id', EnrollmentController.delete);
 
-routes.get('/help_order', HelpOrderController.index);
-routes.put('/help_order/:id/answer', HelpOrderController.update);
+routes.get('/help-order', HelpOrderController.index);
+routes.put('/help-order/:id/answer', HelpOrderController.update);
 
 export default routes;
