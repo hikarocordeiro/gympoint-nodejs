@@ -14,6 +14,13 @@ class HelpOrderController {
       attributes: ['id', 'question', 'answer', 'answer_at'],
       limit: 20,
       offset: (page - 1) * 20,
+      include: [
+        {
+          model: Student,
+          as: 'student',
+          attributes: ['id', 'name', 'email'],
+        },
+      ],
     });
     return res.json(helpOrder);
   }
