@@ -39,7 +39,7 @@ class HelpOrderController {
         {
           model: Student,
           as: 'student',
-          attributes: ['name', 'email'],
+          attributes: ['id', 'name', 'email'],
         },
       ],
     });
@@ -51,7 +51,7 @@ class HelpOrderController {
     helpOrder.answer = req.body.answer;
     helpOrder.answer_at = new Date();
 
-    helpOrder.update();
+    await helpOrder.save();
 
     await Queue.add(AnswerMail.key, {
       helpOrder,
