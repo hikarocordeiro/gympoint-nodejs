@@ -24,7 +24,7 @@ class CheckinController {
     if (checkins >= 5) {
       return res
         .status(401)
-        .json({ error: 'You cant checkin more than 5 times on 7 days.' });
+        .json({ error: 'Você não pode realizar checkin mais de 5 vezes durante 7 dias.' });
     }
 
     const checkin = await Checkin.create({ student_id: req.params.id });
@@ -42,6 +42,7 @@ class CheckinController {
     const checkins = await Checkin.findAll({
       attributes: ['id', 'created_at'],
       where: { student_id: student.id },
+      order: [['id', 'DESC']],
     });
 
     return res.json(checkins);
