@@ -22,9 +22,9 @@ class CheckinController {
     });
 
     if (checkins >= 5) {
-      return res
-        .status(401)
-        .json({ error: 'Você não pode realizar checkin mais de 5 vezes durante 7 dias.' });
+      return res.status(401).json({
+        error: 'Você não pode realizar checkin mais de 5 vezes durante 7 dias.',
+      });
     }
 
     const checkin = await Checkin.create({ student_id: req.params.id });
